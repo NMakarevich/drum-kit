@@ -7,6 +7,10 @@
 </head>
 <body>
 
+  <div class="buttons">
+    <button type="button" name="rec" class="button button-rec"></button>
+    <button type="button" name="play" class="button button-play"></button>
+  </div>
 
   <div class="keys">
     <div data-key="65" class="key">
@@ -60,11 +64,16 @@
 <script>
   const audios = Array.from(document.querySelectorAll('audio'));
   const keysArray = Array.from(document.querySelectorAll('.key'));
-  const keys = document.querySelector('.keys')
+  const keys = document.querySelector('.keys');
+  const recButton = document.querySelector('.button-rec');
+  const playButton = document.querySelector('.button-play');
+  let recArray = [];
+  let isREC = false;
 
   function playSound(event) {
     const audio = audios.find(elem => elem.dataset.key == event.keyCode);
     if (!audio) return;
+    rec(event);
     audio.currentTime = 0;
     audio.play();
     switchTransition(event);
@@ -82,12 +91,42 @@
 
   document.addEventListener('keydown', playSound);
 
+  recButton.addEventListener('click', () => {
+    isREC = !isREC;
+    recButton.classList.toggle('active');
+    if (isREC) {
+      playButton.disabled = true;
+      playButton.classList.remove('active')
+    }
+    else {
+      playButton.disabled = false;
+      playButton.classList.toggle('active');
+      recArray = recArray.filter(item => item).map(item => {
+        let obj = {};
+        obj.keyCode = item;
+        return obj;
+      }).reverse();
+    }
+  })
+  playButton.addEventListener('click', playRec);
+
+  function playRec() {
+    recArray.forEach(item => setInterval(() => playSound(item), 1000))
+  }
+ 
   keys.addEventListener('mousedown', (event) => {
     const clickedKey = event.target.closest('.key');
     if (!clickedKey) return;
+    rec(event)
     const code = {keyCode: clickedKey.dataset.key};
     playSound(code)
   })
+
+  function rec(event) {
+    if(isREC) {
+      recArray.push(+event.keyCode)
+    }
+  }
 </script>
 
 
