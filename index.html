@@ -108,11 +108,20 @@
       }).reverse();
     }
   })
-  playButton.addEventListener('click', playRec);
-
-  function playRec() {
-    recArray.forEach(item => setInterval(() => playSound(item), 1000))
-  }
+  
+  playButton.addEventListener('click', () => { 
+    let timerId = setTimeout(function playRec() {
+      if (recArray.length != 0) {
+        playSound(recArray.pop());
+        timerId = setTimeout(playRec, 1000);
+      }
+      else {
+        clearTimeout(timerId);
+        playButton.classList.toggle('active');
+        playButton.disabled = !playButton.disabled;
+      }
+    }, 1000);
+  });
  
   keys.addEventListener('mousedown', (event) => {
     const clickedKey = event.target.closest('.key');
