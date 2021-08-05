@@ -16,7 +16,6 @@ function keyEvent(event) {
     recording(event);
     str += event.keyCode;
     if (str.includes('686865')) easterEgg();
-    console.log(str)
     audio.currentTime = 0;
     audio.play();
     switchTransition(event);
