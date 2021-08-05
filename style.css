@@ -10,14 +10,24 @@ body,html {
   font-family: sans-serif;
 }
 
-.buttons {
-  position: absolute;
-  top: 100px;
-  right: 100px;
+.container {
   display: flex;
-  width: 100px;
-  height: 40px;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  min-height: 100vh;
+}
+
+.buttons {
+  display: flex;
+  width: 150px;
+  height: 60px;
+  justify-content: space-around;
+  align-items: center;
+  border: .4rem solid black;
+  border-radius: .5rem;
+  background-color: rgba(0,0,0,0.4);
   z-index: 100;
 }
 
@@ -38,38 +48,33 @@ body,html {
   box-shadow: 0 0 10px 3px #FF4040;
 }
 
-.button-play {
-  width: 0;
-  height: 0;
-  background-color: transparent;
-  border: 20px solid #413030;
-  border-left-color: #413030;
-  border-right-width: 0;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  transform: scaleY(0.8);
+.button-rec.active {
+  box-shadow: 0 0 10px 3px #FF4040;
 }
 
-.button-play.active {
-  width: 0;
-  height: 0;
+.button-play {
+  padding: 0;
+  width: 40px;
+  height: 40px;
   background-color: transparent;
-  border: 20px solid #A60000;
-  border-left-color: #A60000;
-  border-right-width: 0;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  transform: scaleY(0.8);
+  border: none;
+}
+
+.button-play svg {
+  width: 100%;
+  height: 100%;
+}
+
+.button-play.active path {
+  fill: #FF4040;
 }
 
 .button-play.active:hover {
-  box-shadow: 0 0 10px 3px #FF4040;
+  filter: drop-shadow(0 0 15px #A60000);
 }
 
 .keys {
   display: flex;
-  flex: 1;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
