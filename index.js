@@ -5,6 +5,7 @@ const recButton = document.querySelector('.button-rec');
 const playButton = document.querySelector('.button-play');
 let recArray = [];
 let isREC = false;
+let str = "";
 
 function keyEvent(event) {
   if(event.keyCode == 82) rec();
@@ -13,6 +14,9 @@ function keyEvent(event) {
     const audio = audios.find(elem => elem.dataset.key == event.keyCode);
     if (!audio) return;
     recording(event);
+    str += event.keyCode;
+    if (str.includes('686865')) easterEgg();
+    console.log(str)
     audio.currentTime = 0;
     audio.play();
     switchTransition(event);
@@ -22,7 +26,6 @@ function keyEvent(event) {
 keys.addEventListener('mousedown', (event) => {
   const clickedKey = event.target.closest('.key');
   if (!clickedKey) return;
-  recording(event);
   const code = {keyCode: clickedKey.dataset.key};
   keyEvent(code);
 })
@@ -43,6 +46,7 @@ function rec() {
   isREC = !isREC;
   recButton.classList.toggle('active');
   if (isREC) {
+    recArray = [];
     playButton.disabled = true;
     playButton.classList.remove('active');
   }
@@ -50,7 +54,7 @@ function rec() {
     if (recArray.length) {
       playButton.disabled = false;
       playButton.classList.toggle('active');
-      recArray = recArray.filter(item => item).map(item => {
+      recArray = recArray.map(item => {
         let obj = {};
         obj.keyCode = item;
         return obj;
@@ -82,5 +86,11 @@ function playRec() {
 recButton.addEventListener('click', rec);
 playButton.addEventListener('click', playRec);
 
-
-
+function easterEgg() {
+  const linkHTML = '<a href="https://www.youtube.com/watch?v=y3Ca3c6J9N4" class="easter-egg" target="_blank"></a>'
+  const div = document.createElement('div');
+  div.innerHTML = linkHTML;
+  document.body.appendChild(div.firstChild);
+  const egg = document.querySelector('.easter-egg');
+  egg.click();
+}
