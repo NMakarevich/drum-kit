@@ -93,4 +93,5 @@ function easterEgg() {
   document.body.appendChild(div.firstChild);
   const egg = document.querySelector('.easter-egg');
   egg.click();
+  str = "";
 }
