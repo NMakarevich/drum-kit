@@ -4,7 +4,8 @@ html {
   background-size: cover;
 }
 
-body,html {
+body,
+html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -110,4 +111,25 @@ kbd {
   text-transform: uppercase;
   letter-spacing: .1rem;
   color: #ffc600;
+}
+
+.easter-egg {
+  position: absolute;
+  display: block;
+  padding: 20px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-200px);
+  transition: 1s;
+  font-size: 4rem;
+  font-family: monospace;
+  color: white;
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.4);
+  border: .4rem solid black;
+  border-radius: .5rem;
+}
+
+.easter-egg.show {
+  transform: translateX(-50%) translateY(100px);
 }

@@ -86,12 +86,16 @@ recButton.addEventListener('click', rec);
 playButton.addEventListener('click', playRec);
 
 function easterEgg() {
-  const linkHTML = '<a href="https://www.youtube.com/watch?v=y3Ca3c6J9N4" class="easter-egg" target="_blank"></a>'
   const div = document.createElement('div');
-  div.innerHTML = linkHTML;
-  document.body.appendChild(div.firstChild);
-  const egg = document.querySelector('.easter-egg');
-  egg.click();
-  str = "";
-  egg.remove();
+  div.innerHTML = `<a href="https://www.youtube.com/watch?v=cBKtwUAtnJ4" class="easter-egg" target="_blank">We will rock you</a>`;
+  document.body.appendChild(div.firstElementChild);
+  setTimeout(() => {
+    const egg = document.querySelector('.easter-egg');
+    egg.classList.add('show');
+    str = "";
+    egg.addEventListener('click', () => {
+      egg.classList.remove('show');
+      egg.remove();
+    })
+  }, 0)
 }
