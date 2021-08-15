@@ -69,10 +69,10 @@ function recording(event) {
 }
 
 function playRec() {
-  let timerId = setTimeout(function playRec() {
+  let timerId = setTimeout(function playRecord() {
     if (recArray.length != 0) {
       keyEvent(recArray.pop());
-      timerId = setTimeout(playRec, 500);
+      timerId = setTimeout(playRecord, 500);
     }
     else {
       clearTimeout(timerId);
